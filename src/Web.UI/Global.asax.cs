@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using NHibernate;
 using StructureMap;
-using IDependencyResolver = System.Web.Mvc.IDependencyResolver;
 
 namespace CommunitySite.Web.UI
 {
@@ -10,6 +10,16 @@ namespace CommunitySite.Web.UI
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        protected void Application_BeginRequest()
+        {
+            ObjectFactory.Inject(typeof(ISession), ObjectFactory.GetInstance<ISessionFactory>().OpenSession());
+        }
+
+        protected void Application_EndRequest()
+        {
+            ObjectFactory.EjectAllInstancesOf<ISession>();
+        }
+
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());

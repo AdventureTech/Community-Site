@@ -1,7 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using CommunitySite.Core.Data;
 using CommunitySite.Web.UI;
 using CommunitySite.Web.UI.Controllers;
+using FakeItEasy;
 using Machine.Specifications;
 using MvcContrib.TestHelper;
 
