@@ -1,6 +1,7 @@
 using System.Linq;
 using CommunitySite.Core.Data;
 using CommunitySite.Core.Data.NHibernate;
+using CommunitySite.Core.Services.Authentication;
 using CommunitySite.Core.Services.Configuration;
 using NHibernate;
 using StructureMap;
@@ -57,6 +58,7 @@ namespace CommunitySite.Web.UI
         public ServiceRegistry()
         {
             For<ConfigurationService>().Use<WebConfigurationService>();
+            For<AuthenticationService>().Use<WebAuthenticationService>();
         }
     }
 }

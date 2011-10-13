@@ -1,4 +1,6 @@
-﻿using CommunitySite.Core.Domain;
+﻿using CommunitySite.Core.Data;
+using CommunitySite.Core.Domain;
+using CommunitySite.Core.Services.Authentication;
 using CommunitySite.Web.UI.Controllers;
 using FakeItEasy;
 using Machine.Specifications;
@@ -77,5 +79,87 @@ namespace CommunitySite.Specifications.Membership
         static string _invalidPassword;
     }
 
+    public class When_authenticating_with_a_valid_username_and_password
+    {
+        Establish context = () =>
+            {
+                _validPassword = "ValidPassword";
+                _validUser = "ValidUsername";
+                _repository = A.Fake<MemberRepository>();
 
+                A.CallTo(() => _repository.GetByUsername(_validUser))
+               .Returns(new Member { Username = _validUser, Password = _validPassword});
+                
+                _authService = new WebAuthenticationService(_repository);
+            };
+
+        Because of = () => _result = _authService.Authenticate(_validUser, _validPassword);
+
+        It should_return_true = () => _result.ShouldBeTrue();
+
+        It should_get_membership_information_for_the_username = () =>
+            A.CallTo(() => _repository.GetByUsername(_validUser)).MustHaveHappened();
+
+
+
+        static WebAuthenticationService _authService;
+        static bool _result;
+        static string _validUser;
+        static string _validPassword;
+        static MemberRepository _repository;
+    }
+
+    public class When_authenticating_with_a_valid_username_and_invalid_password
+    {
+        Establish context = () =>
+        {
+            _invalidPassword = "InValidPassword";
+            _validUser = "ValidUsername";
+            _repository = A.Fake<MemberRepository>();
+            A.CallTo(() => 
+                _repository.GetByUsername(_validUser))
+                .Returns(new Member { Username = _validUser, Password = "Does not match" });
+            _authService = new WebAuthenticationService(_repository);
+        };
+
+        Because of = () => _result = _authService.Authenticate(_validUser, _invalidPassword);
+
+        It should_return_false = () => _result.ShouldBeFalse();
+
+        It should_get_membership_information_for_the_username = () =>
+            A.CallTo(() => _repository.GetByUsername(_validUser)).MustHaveHappened();
+
+        static WebAuthenticationService _authService;
+        static bool _result;
+        static string _validUser;
+        static string _invalidPassword;
+        static MemberRepository _repository;
+    }
+
+    public class When_authenticating_with_a_invalid_username
+    {
+        Establish context = () =>
+        {
+            _invalidPassword = "InValidPassword";
+            _invalidUser = "InvalidUsername";
+            _repository = A.Fake<MemberRepository>();
+            A.CallTo(() =>
+                     _repository.GetByUsername(_invalidUser))
+                .Returns(null);
+            _authService = new WebAuthenticationService(_repository);
+        };
+
+        Because of = () => _result = _authService.Authenticate(_invalidUser, _invalidPassword);
+
+        It should_return_false = () => _result.ShouldBeFalse();
+
+        It should_get_membership_information_for_the_username = () =>
+            A.CallTo(() => _repository.GetByUsername(_invalidUser)).MustHaveHappened();
+
+        static WebAuthenticationService _authService;
+        static bool _result;
+        static string _invalidUser;
+        static string _invalidPassword;
+        static MemberRepository _repository;
+    }
 }

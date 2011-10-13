@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm()) {
+    
+  @TempData["Error"]
+    <fieldset>
+        <legend>Member</legend>
+
+       <div class="editor-label">
+            @Html.Label("Username")
+        </div>
+        <div class="editor-field">
+            @Html.Editor("Username")        
+        </div>
+
+        <div class="editor-label">
+          @Html.Label("Password")   
+        </div>
+        <div class="editor-field">
+         @Html.Editor("Password")          
+        </div>
+
+        <p>
+            <input type="submit" value="Login" />
+        </p>
+    </fieldset>
+}
+
