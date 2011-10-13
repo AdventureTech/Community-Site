@@ -53,9 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HomePageSpecs.cs" />
-    <Compile Include="Membership\MemberRegistrationSpecs.cs" />
+    <Compile Include="Membership\MemberLoginSpecs.cs" />
+    <Compile Include="MemberRegistrationSpecs.cs" />
     <Compile Include="Membership\MembershipControllerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisteredRoutesContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

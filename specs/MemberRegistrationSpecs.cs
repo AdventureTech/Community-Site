@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 using System.Web.Routing;
 using CommunitySite.Core.Data;
 using CommunitySite.Core.Data.NHibernate;
@@ -14,13 +13,8 @@ using MvcContrib.TestHelper;
 namespace CommunitySite.Specifications.Membership
 {
     public class When_an_anonymous_user_wishes_to_register_for_membership
+        : With_the_main_site_routes_registered
     {
-        Establish context = () =>
-            {
-                RouteTable.Routes.Clear();
-                MvcApplication.RegisterRoutes(RouteTable.Routes);
-            };
-
         It should_navigate_to_the_member_registration_page =()=>
             "~/member/register".ShouldMapTo<MemberController>(ctrl=>ctrl.Register());
     }
@@ -118,13 +112,14 @@ namespace CommunitySite.Specifications.Membership
         Establish context = () =>
             {
                 _repository = A.Fake<Repository>();
-                A.CallTo(() => _repository.All<Member>()).Returns(new List<Member>
-                                                                      {
-                                                                          new Member{Username = "John"},
-                                                                          new Member{Username = "Bill"},
-                                                                          new Member{Username = "Steve"},
-                                                                          new Member{Username = "Dave"}
-                                                                      }.AsQueryable());
+                A.CallTo(() => _repository.All<Member>())
+                    .Returns(new List<Member>
+                                 {
+                                     new Member {Username = "John"},
+                                     new Member {Username = "Bill"},
+                                     new Member {Username = "Steve"},
+                                     new Member {Username = "Dave"}
+                                 }.AsQueryable());
                 _memberRepository = new NHibernateMemberRepository(_repository);
             };
 
