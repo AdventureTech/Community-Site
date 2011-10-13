@@ -76,4 +76,6 @@ namespace CommunitySite.Specifications.Membership
         static string _invalidUsername;
         static string _invalidPassword;
     }
+
+
 }
