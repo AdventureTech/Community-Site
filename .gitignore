@@ -13,4 +13,3 @@ _ReSharper.*
 *.sln.cache
 *Specifications.html
 *.db3
-*App_Data
