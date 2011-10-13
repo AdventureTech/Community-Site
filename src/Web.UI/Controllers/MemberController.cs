@@ -21,6 +21,11 @@ namespace CommunitySite.Web.UI.Controllers
         [HttpPost]
         public ActionResult Register(Member member)
         {
+            if (_memberRepository.GetByUsername(member.Username) != null)
+            {
+                ModelState.AddModelError("UserName", "Username already exists");
+            }
+
             if(ModelState.IsValid)
             {
                 _memberRepository.Save(member);
