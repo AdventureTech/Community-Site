@@ -9,8 +9,6 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Member</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.FirstName)
@@ -45,11 +43,6 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input class="button" type="submit" value="Create" />
         </p>
-    </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

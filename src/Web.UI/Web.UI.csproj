@@ -84,6 +84,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +115,16 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\MarketPlace\images\button.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\content-wrap.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\content.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\firefox-gray.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\footer-bottom.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\header-bg.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\header-photo.jpg" />
+    <Content Include="Content\themes\MarketPlace\style.css" />
+    <Content Include="Content\themes\MarketPlace\images\nav-current.jpg" />
+    <Content Include="Content\themes\MarketPlace\images\nav.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
